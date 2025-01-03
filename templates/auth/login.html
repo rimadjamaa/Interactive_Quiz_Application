@@ -1,0 +1,41 @@
+{% extends "app.html" %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+{% endwith %}
+<h1 class="display-4 text-center my-5">Login</h1>
+
+    <div class="container">
+        <div class="row row-cols-sm-1 row-cols-lg-3 container">
+            <div class="col-12">
+            </div>
+            <div class="col-12">
+                <form method="post" action="{{ url_for('UserLogin') }}">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label visually-hidden">Username</label>
+                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label visually-hidden">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                </form>
+                <p class="my-4">Not a member yet? <b><a href="{{ url_for('register') }}">Register</a></b></p>
+            </div>
+            <div class="col-12">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
