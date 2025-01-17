@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/python:3.12
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    command: sh -c "while sleep 1000; do :; done"
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: mimirima123
+      MYSQL_DATABASE: quizapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  mysql_data:
+
+
+
+#  ✔ Network interactive_quiz_application_default      Created                                                                0.1s 
+#  ✔ Volume "interactive_quiz_application_mysql_data"  Created                                                                0.0s 
+#  ✔ Container interactive_quiz_application-app-1      Created                                                                0.0s 
+#  ✔ Container interactive_quiz_application-db-1       Created 

@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+PyMySQL
+SQLAlchemy
+cryptography
+flask_login
+requests

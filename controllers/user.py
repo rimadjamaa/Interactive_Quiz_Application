@@ -1,6 +1,9 @@
 from flask import render_template, request, redirect, url_for, flash , session
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.models import User, db
+from flask_login import login_user, logout_user
+
+
 def register():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -53,8 +56,14 @@ def login():
     if user and check_password_hash(user.password, password):
       session['user_id'] = user.id
       flash('Login successful!', 'success')
-      return redirect(url_for('home'))  # Redirect to protected area
+      login_user(user)
+      return redirect(url_for('userhome'))  # Redirect to protected area
     else:
       flash('Login failed. Please check your username and password.', 'danger')
       return render_template('auth/login.html')
   return render_template('auth/login.html')
+
+def logout():
+   logout_user()
+   return redirect(url_for('login'))
+   
